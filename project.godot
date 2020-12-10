@@ -16,8 +16,13 @@ _global_script_class_icons={
 [application]
 
 config/name="Plataforma"
-run/main_scene="res://level2.tscn"
+run/main_scene="res://levels/level1.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Game="*res://game.gd"
+Events="*res://events.gd"
 
 [rendering]
 

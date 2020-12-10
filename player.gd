@@ -3,11 +3,11 @@ extends KinematicBody2D
 
 var gravity = 9.8;
 var velocity = Vector2();
-var speed = Vector2(250, 650);
+var speed = Vector2(200, 650);
 var slowdown = Vector2(20, 0);
 var acceleration = Vector2(0,0)
-var max_acceleration = Vector2(600,0);
-var speed_acce = 5;
+var max_acceleration = Vector2(450,0);
+var speed_acce = 2;
 
 func _ready():
 	pass
@@ -18,13 +18,13 @@ func _physics_process(delta):
 	
 	velocity = move_and_slide(velocity, Vector2.UP);
 	
-	
 	_handle_input();
 	
 	_handle_animation();
 	
 	_handle_acceleration();
 	
+	_handle_collision();
 	
 	
 func _handle_input():
@@ -75,5 +75,8 @@ func _handle_acceleration():
 		acceleration.x = max_acceleration.x;
 		
 	
-		
-	
+func _handle_collision():
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		if collision.collider.is_in_group("danger"):
+			Events.emit_signal("player_died");
